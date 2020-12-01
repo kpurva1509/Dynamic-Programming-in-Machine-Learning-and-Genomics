@@ -1,0 +1,28 @@
+Find a middle edge in the alignment graph in linear space.
+
+Input: A match score m, a mismatch penalty μ, a gap penalty σ, and two DNA strings s and t.
+
+Output: The maximum alignment score of s and t followed by an alignment achieving this maximum score.
+
+The quadratic memory required to store the entire alignment matrix can become overly massive for long DNA strings. However, keep in mind that, during the alignment algorithm, we only need two rows (i.e., linear space) at any given time in order to compute the optimal score. It turns out that we can exploit this phenomenon to compute the entire optimal alignment in linear space as well.
+Given strings s1 … sn and and t1 … tm, define middle = ⌊m/2⌋. The middle column of the alignment graph of s and t is the column containing all nodes (i, middle) for 0 ≤ i ≤ n. A longest path from source to sink in the alignment graph must cross the middle column somewhere, and we refer to the node on a longest path belonging to the middle column as a middle node, and we refer to the edge in an optimal path starting at a given middle node as a middle edge.
+
+Input Format. The first line of the input contains m followed by μ followed by σ (separated by spaces), the second line of the input contains a DNA string s, and the third line of the input contains a DNA string t.
+
+Output Format. The middle edge in the form (i,j) (k,l), where (i,j) and (k, l) are adjacent nodes in the alignment graph, i.e., there is an edge between these nodes.  
+
+Constraints. |s| ≤ 1,000; |t| ≤ 1,000.
+
+The problem statement for the middle edge problem seems a little confusing to me. The original problem describes string s in the range(1 to n) and t in the range(1 to m). It further describes the middle column to be floor(m/2), which implies the length of the 2nd string t divided by 2.
+
+Therefore, for the matrix, s contributes to the rows and t contributes to the columns.
+
+However, in some of the test cases, I see that 1st input string is taken to be "t" instead of "s". That way, the coordinates of the middle node change completely.
+
+For example, the sample dataset:
+
+GAGA should be vertically placed, and GAG should be horizontally placed instead. 
+
+Similarly, for test case 1:
+
+string t should be "CC", which implies middle should be 1, but in the solutions, the coordinate for middle in the starting node of the middle edge is 2 instead, which imples that t = "TTTT" here
